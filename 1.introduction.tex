@@ -1,5 +1,6 @@
 \section{Introduction}
 \label{sec:introduction}
 
-The introduction of your awesome project.
+Browsers are designed around the same-origin policy, which prevents one website from directly inspecting the contents of another website. Despite this isolation, webpages still share underlying resources such as the CPU, GPU, caches, and browser rendering system. Differences in how these resources behave while processing particular visual content can potentially leak information through a side channel.
 
+Our project will investigate whether we can reproduce the general idea of a pixel-stealing attack within a controlled experimental environment. Rather than attacking real websites or user data, we will create a synthetic victim webpage whose contents are known to us. A separate malicious webpage will attempt to infer those contents indirectly. We are particularly interested in understanding the relationship between attack duration and recovery quality.

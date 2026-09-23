@@ -1,9 +1,19 @@
 \section{Threat Model}
 \label{sec:threat}
 
-Describe your threat model.
+We assume that an attacker controls a malicious website and convinces a user to visit it. The attacker does not have direct access to the victim website's DOM, memory, network traffic, or authentication information. Instead, the attacker can only execute ordinary browser code from the malicious origin and observe side-channel measurements exposed through shared browser or hardware behavior.
+
+For our experiments, the victim will be a webpage that we control and populate with known content such as simple shapes, colors, text, or a small grid of pixels. This gives us ground truth for evaluating the attack.
 
 \section{Our Approach}
 \label{sec:approach}
 
-Describe your approach to the problem.
+We will first construct a controlled experimental setup consisting of two origins: a malicious webpage and a victim webpage. The victim webpage will display known visual information that we attempt to recover.
+
+We will then reproduce a rendering or hardware side channel based on techniques described in existing pixel-stealing research. At a high level, the malicious webpage will repeatedly perform rendering measurements whose behavior may depend on visual properties of the victim content. We will collect these measurements over time and determine whether statistical differences can distinguish between different victim pixel values or visual patterns.
+
+We will begin with a deliberately simple victim, such as distinguishing between two colors or recovering a small binary image. If this succeeds, we will gradually increase the complexity of the recovered information by testing larger images or simple text.
+
+A major part of the project will be examining the tradeoff between time and information recovery. Since we assume the attacker can remain active for a long period, we can repeat measurements to reduce noise and improve confidence instead of focusing primarily on maximizing attack speed.
+
+For our stretch goal, the malicious webpage will maintain a record of which portions of the victim content have already been tested and the confidence associated with each recovered value. This state could be stored by the malicious origin so that, if the user leaves and later returns, the experiment can continue from the previous recovery state instead of starting again.
